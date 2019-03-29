@@ -1,6 +1,5 @@
 import { Component, ElementRef, ViewChild, ContentChildren, QueryList } from '@angular/core';
 import { IndexGroupComponent } from './index-group';
-import smoothscroll from 'smoothscroll-polyfill';
 
 /**
  * Generated class for the IndexListComponent component.
@@ -16,8 +15,9 @@ export class IndexListComponent {
 
 
   _indexes: any[] = []; //右侧导航
-  _currentIndicator = '';
-  _flag = true;
+  _currentIndicator= '';
+
+  _flag= true;
   _offsetTops: Array<number> = [];
   _navOffsetX: 0;
   _indicatorTime: any = null;
@@ -29,15 +29,13 @@ export class IndexListComponent {
     console.log('Hello IndexListComponent Component');
   }
 
-  ngAfterContentChecked() {
+
+  ngAfterContentChecked(){
     this.resetIndicator();
   }
-  ionViewDidEnter() {
-    smoothscroll.polyfill();
-  }
 
-  resetIndicator() {
-    if (this._flag && this._listOfIndexSection && this._listOfIndexSection.length > 0) {
+  resetIndicator(){
+    if (this._listOfIndexSection && this._listOfIndexSection.length > 0){
       this._indexes = [];
       this._offsetTops = [];
       let tempIndexs: any[] = [];
@@ -45,43 +43,45 @@ export class IndexListComponent {
         tempIndexs.push(section.index);
         const offsetTop = section.getOffsetTop();
         this._offsetTops.push(offsetTop);
+        console.log(section);
       });
       this._indexes = tempIndexs;
-      if (this._indexes.length > 0) {
+      if(this._indexes.length>0){
         this._currentIndicator = this._indexes[0];
       }
-      this._flag = false;
     }
   }
 
-  onScroll(e: any) {
+  onScroll(e:any) {
     e.preventDefault();
     const scrollTopOffsetTop = this.scrollContent.nativeElement.scrollTop;
     this._offsetTops.forEach((v, i) => {
-      if (scrollTopOffsetTop >= v) {
+      if (scrollTopOffsetTop >= v){
         this._currentIndicator = this._indexes[i];
       }
     });
   }
 
-  touchstart(e: any) {
+  touchstart(e:any){
     this._navOffsetX = e.changedTouches[0].clientX;
     this.scrollList(e.changedTouches[0].clientY);
   }
 
-  touchmove(e: any) {
+  touchmove(e:any){
     e.preventDefault();
     this.scrollList(e.changedTouches[0].clientY);
   }
 
-  touchend(e: any) {
+  touchend(e:any){
     this._indicatorTime = setTimeout(() => {
       this._showModal = false;
+      this._currentIndicator = '';
     }, 500);
   }
 
-  scrollList(y: any) {
-    const currentItem: any = document.elementFromPoint(this._navOffsetX, y);
+  scrollList(y:any){
+
+    const currentItem:any = document.elementFromPoint(this._navOffsetX, y);
     if (!currentItem || !currentItem.classList.contains('index-bar')) {
       return;
     }
@@ -89,14 +89,14 @@ export class IndexListComponent {
     this.scrollIntoView(this._currentIndicator);
   }
 
-  scrollIntoView(id: string) {
+  scrollIntoView(id: string){
     let element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    if(element){
+      element.scrollIntoView();
       this._showModal = true;
       if (this._indicatorTime) {
         clearTimeout(this._indicatorTime);
       }
     }
-  }
+  } 
 }

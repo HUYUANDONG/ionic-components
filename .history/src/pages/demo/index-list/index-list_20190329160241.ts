@@ -95,4 +95,16 @@ export class IndexListPage {
   ionViewDidLoad() {
 
   }
+
+  onChangeSource() {
+    if (this.currentKeyIndex < this.keys.length) {
+      this.vm.groups.push({
+        key: this.keys[this.currentKeyIndex],
+        items: [{ name: "Demo", value: "Demo" }]
+      });
+      this.currentKeyIndex++;
+    } else {
+      alert('到头了');
+    }
+  }
 }
