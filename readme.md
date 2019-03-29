@@ -1,7 +1,8 @@
 
-插件fork fromhttps://github.com/woodstream/ionic-components 在此基础上进行修改的版本
+插件fork fromhttps://github.com/woodstream/ionic-components 在此基础上进行修改的版本;
+
 1.修复了在手机端点击右侧字母左侧滚动不平滑;
-2.修复左侧滚动右侧不随动
+2.修复左侧滚动右侧不随动;
 
 >代码为index-list（原来代码基本没动，只改动锚点滚动逻辑）和index-group（重新实现）共两个组件，所以会发现两种不同的代码风格。
 # 示范使用
