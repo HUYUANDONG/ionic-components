@@ -1,14 +1,7 @@
-先前写过另一篇文章[《ionic3开源组件》](https://www.jianshu.com/p/3e156999eaa4)，里面有一个分类我其实没怎么用过：
-># 锚点滚动列表
->*   [ionic2-alpha-scroll](https://github.com/rossmartin/ionic2-alpha-scroll)
->*   [ionic2-indexed-scroll](https://github.com/HsuanXyz/ionic2-indexed-scroll)
->*   [ionic3-index-list](https://github.com/CK110/ionic3-index-list)——群里有人发就补充上来了
 
-其中有不少人私信我，说[ionic3-index-list](https://github.com/CK110/ionic3-index-list)有问题，我没理，今天又有人和我说，于是我简单看了下源码，没发现什么问题（后来发现个原有组件不能动态刷新锚点栏的Bug），只是觉得它写得有点复杂了，和现有ionic的组件集成度还没那么好（如不能很好兼容使用单选和多选列表），所以花了几分钟，在大部分沿用原来代码的基础下，简单改动了下：
-1. 移除多余的ion-index-cell；
-2. ion-index-section修改为index-group，并替换为官方list的相关组件；
-3. 修改锚点滚动逻辑；
-4. 修改原有组件不能动态刷新锚点栏的bug；
+插件fork fromhttps://github.com/woodstream/ionic-components 在此基础上进行修改的版本
+1.修复了在手机端点击右侧字母左侧滚动不平滑;
+2.修复左侧滚动右侧不随动
 
 >代码为index-list（原来代码基本没动，只改动锚点滚动逻辑）和index-group（重新实现）共两个组件，所以会发现两种不同的代码风格。
 # 示范使用
